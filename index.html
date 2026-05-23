@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio | Ramadhani Septo Pamungkas</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            900: '#0c4a6e',
+                        }
+                    },
+                    animation: {
+                        'bounce-slow': 'bounce 3s linear infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons untuk ikon UI modern -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Efek custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0ea5e9;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0284c7;
+        }
+        /* Efek glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .light .glass {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        /* Gaya animasi reveal saat scroll */
+        .reveal {
+            position: relative;
+            transform: translateY(30px);
+            opacity: 0;
+            transition: 1s all ease;
+        }
+        .reveal.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100" id="body">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 w-full z-50 glass transition-all duration-300 py-4" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-500 hover:scale-105 transition-transform">
+                RAMADHANI.SP
+            </a>
+            
+            <!-- Menu Desktop -->
+            <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#beranda" class="hover:text-sky-400 transition-colors">Beranda</a>
+                <a href="#tentang" class="hover:text-sky-400 transition-colors">Tentang</a>
+                <a href="#pengalaman" class="hover:text-sky-400 transition-colors">Pengalaman</a>
+                <a href="#keahlian" class="hover:text-sky-400 transition-colors">Keahlian</a>
+                <a href="#sertifikat" class="hover:text-sky-400 transition-colors">Sertifikat</a>
+                <a href="#kontak" class="hover:text-sky-400 transition-colors">Kontak</a>
+                
+                <!-- Tombol Ganti Tema -->
+                <button onclick="toggleTheme()" class="p-2 rounded-full bg-slate-900/50 hover:bg-slate-800 text-sky-400 border border-slate-800 transition-all" aria-label="Ganti Tema">
+                    <i data-lucide="sun" id="theme-icon" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Tombol Menu Mobile & Tema -->
+            <div class="flex items-center space-x-4 md:hidden">
+                <button onclick="toggleTheme()" class="p-2 rounded-full bg-slate-900/50 hover:bg-slate-800 text-sky-400 border border-slate-800 transition-all">
+                    <i data-lucide="sun" id="theme-icon-mobile" class="w-5 h-5"></i>
+                </button>
+                <button onclick="toggleMobileMenu()" class="text-slate-100 hover:text-sky-400 transition-colors focus:outline-none">
+                    <i data-lucide="menu" class="w-6 h-6" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Dropdown Menu Mobile -->
+        <div class="hidden md:hidden absolute top-full left-0 w-full glass border-t border-slate-800 px-6 py-4 flex flex-col space-y-4 shadow-xl" id="mobile-menu">
+            <a href="#beranda" onclick="toggleMobileMenu()" class="hover:text-sky-400 transition-colors py-2">Beranda</a>
+            <a href="#tentang" onclick="toggleMobileMenu()" class="hover:text-sky-400 transition-colors py-2">Tentang</a>
+            <a href="#pengalaman" onclick="toggleMobileMenu()" class="hover:text-sky-400 transition-colors py-2">Pengalaman</a>
+            <a href="#keahlian" onclick="toggleMobileMenu()" class="hover:text-sky-400 transition-colors py-2">Keahlian</a>
+            <a href="#sertifikat" onclick="toggleMobileMenu()" class="hover:text-sky-400 transition-colors py-2">Sertifikat</a>
+            <a href="#kontak" onclick="toggleMobileMenu()" class="hover:text-sky-400 transition-colors py-2">Kontak</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Beranda) -->
+    <section id="beranda" class="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden">
+        <!-- Efek Cahaya Latar Belakang -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-sky-500/10 rounded-full blur-[120px] pointer-events-none animate-pulse-slow"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] pointer-events-none animate-pulse-slow" style="animation-delay: 2s;"></div>
+
+        <div class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10 w-full">
+            
+            <!-- Teks Utama Hero -->
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left order-2 lg:order-1">
+                <div class="inline-flex items-center space-x-2 bg-sky-500/10 border border-sky-500/30 text-sky-400 px-4 py-1.5 rounded-full text-sm font-semibold tracking-wide hover:bg-sky-500/20 transition-all">
+                    <span>Lulusan Teknik Elektronika</span>
+                    <i data-lucide="sparkles" class="w-4 h-4 animate-spin" style="animation-duration: 4s;"></i>
+                </div>
+                
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                    Halo, Saya <br class="hidden sm:inline" />
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-blue-400 to-indigo-500">
+                        Ramadhani Septo P.
+                    </span>
+                </h1>
+                
+                <p class="text-slate-400 text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                    Seorang teknisi muda profesional di bidang <strong class="text-slate-200">Teknik Elektronika Audio Video</strong>. Ahli dalam instalasi, perawatan, perbaikan perangkat rumah tangga, pendingin ruangan (AC), serta memiliki ketertarikan kuat dalam pembuatan website.
+                </p>
+
+                <!-- Tombol Navigasi -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+                    <a href="#kontak" class="px-8 py-4 bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-bold rounded-2xl shadow-lg shadow-sky-500/20 hover:shadow-sky-500/40 hover:-translate-y-1 transition-all flex items-center justify-center gap-2 group">
+                        Hubungi Saya 
+                        <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <a href="#tentang" class="px-8 py-4 bg-slate-900 hover:bg-slate-850 text-slate-200 border border-slate-800 hover:border-slate-700 font-semibold rounded-2xl hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
+                        Pelajari Profil
+                    </a>
+                </div>
+
+                <!-- Info Singkat Cepat -->
+                <div class="grid grid-cols-3 gap-4 pt-8 max-w-md mx-auto lg:mx-0 border-t border-slate-900/80">
+                    <div>
+                        <div class="text-2xl font-bold text-sky-400">SMK 2</div>
+                        <div class="text-xs text-slate-400">Purwokerto</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-sky-400">86.60</div>
+                        <div class="text-xs text-slate-400">Nilai Rata-rata</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-sky-400">3+ Bln</div>
+                        <div class="text-xs text-slate-400">Pengalaman PKL</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Foto Profil (Dari Gambar Upload) -->
+            <div class="lg:col-span-5 flex justify-center order-1 lg:order-2">
+                <div class="relative w-72 h-72 sm:w-85 sm:h-85 lg:w-96 lg:h-96 group">
+                    <!-- Bingkai Cahaya Gradient -->
+                    <div class="absolute inset-0 bg-gradient-to-tr from-sky-500 to-indigo-600 rounded-[2.5rem] blur-xl opacity-30 group-hover:opacity-50 transition-all duration-700 scale-95 group-hover:scale-105"></div>
+                    
+                    <!-- Bingkai Utama -->
+                    <div class="absolute inset-0 bg-gradient-to-tr from-sky-500 via-sky-400 to-indigo-600 p-1.5 rounded-[2.5rem] shadow-2xl transition-all duration-500 group-hover:rotate-1">
+                        <div class="w-full h-full rounded-[2.2rem] overflow-hidden bg-slate-900 relative">
+                            <!-- Foto Utama (Menggunakan Jalur Relatif ./ yang Benar untuk Preview) -->
+                            <img src="./IMG_3925RAMADHANISEPTOPAMUNGKAS.jpg" alt="Ramadhani Septo Pamungkas" class="w-full h-full object-cover object-top hover:scale-110 transition-transform duration-700 opacity-0" onload="this.classList.remove('opacity-0'); this.classList.add('transition-opacity', 'duration-500', 'opacity-100')" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop'; this.classList.remove('opacity-0'); this.classList.add('opacity-100')">
+                            
+                            <!-- Overlay Elemen Halus -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60"></div>
+                        </div>
+                    </div>
+
+                    <!-- Badge Mengapung -->
+                    <div class="absolute -bottom-4 -right-4 glass border border-slate-800 p-4 rounded-2xl shadow-xl flex items-center space-x-3 animate-bounce-slow">
+                        <div class="w-10 h-10 bg-sky-500/20 text-sky-400 rounded-xl flex items-center justify-center">
+                            <i data-lucide="wrench" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs text-slate-400">Spesialisasi</div>
+                            <div class="text-sm font-bold text-slate-100">Teknisi Elektro & AC</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Section: Profil & Tentang Saya -->
+    <section id="tentang" class="py-24 relative bg-slate-900/30">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-xs font-bold tracking-widest text-sky-400 uppercase mb-2">PROFIL SINGKAT</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold">Mengenal Lebih Dekat</h3>
+                <div class="w-12 h-1 bg-sky-500 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Sisi Kiri: Kartu Identitas -->
+                <div class="lg:col-span-5 reveal">
+                    <div class="glass p-8 rounded-3xl space-y-6 relative overflow-hidden border border-slate-800">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-sky-500/5 rounded-full blur-2xl"></div>
+                        
+                        <div class="space-y-4">
+                            <h4 class="text-xl font-bold text-sky-400">Informasi Pribadi</h4>
+                            <p class="text-sm text-slate-400 leading-relaxed">Berikut merupakan kontak resmi dan alamat domisili saya saat ini:</p>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-10 h-10 bg-sky-500/10 text-sky-400 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="map-pin" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-400">Alamat</div>
+                                    <div class="text-sm font-medium text-slate-200">Jl. Jendral Sudirman Barat, Rejasari, RT01 RW04, Purwokerto Barat</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-4">
+                                <div class="w-10 h-10 bg-sky-500/10 text-sky-400 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="mail" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-400">Email Utama</div>
+                                    <a href="mailto:ramadhani25489@gmail.com" class="text-sm font-medium text-slate-200 hover:text-sky-400 transition-colors">ramadhani25489@gmail.com</a>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-4">
+                                <div class="w-10 h-10 bg-sky-500/10 text-sky-400 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="phone" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-400">Nomor Telepon / WA</div>
+                                    <a href="https://wa.me/6287828174736" target="_blank" class="text-sm font-medium text-slate-200 hover:text-sky-400 transition-colors">0878-2817-4736</a>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-4">
+                                <div class="w-10 h-10 bg-sky-500/10 text-sky-400 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="instagram" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-400">Instagram</div>
+                                    <a href="https://instagram.com/rdhanisp" target="_blank" class="text-sm font-medium text-slate-200 hover:text-sky-400 transition-colors">@rdhanisp</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sisi Kanan: Uraian Profil & Pendidikan -->
+                <div class="lg:col-span-7 space-y-8 reveal">
+                    <div class="space-y-4">
+                        <h4 class="text-2xl font-bold">Siapa saya sebenarnya?</h4>
+                        <p class="text-slate-400 leading-relaxed">
+                            Saya adalah lulusan baru dari <strong class="text-slate-200">SMK Negeri 2 Purwokerto</strong>, menempuh pendidikan fokus pada <strong class="text-sky-400">Teknik Elektronika Audio Video</strong>. Sepanjang masa studi, saya tidak hanya belajar secara teori di kelas namun juga sangat aktif dalam mengasah keahlian praktis melalui instalasi kelistrikan, perawatan, serta perbaikan perangkat audio video dan peralatan pendingin udara.
+                        </p>
+                        <p class="text-slate-400 leading-relaxed">
+                            Saya dikenal sebagai pribadi dengan etos kerja yang tinggi, jujur, cepat mengadopsi teknologi baru, serta ramah dalam berkomunikasi dengan pelanggan. Saya siap mendedikasikan waktu dan keahlian terbaik saya baik secara mandiri maupun dalam tim kolaboratif.
+                        </p>
+                    </div>
+
+                    <!-- Kartu Pendidikan -->
+                    <div class="glass p-6 rounded-2xl border border-slate-800 relative overflow-hidden">
+                        <div class="absolute top-4 right-4 text-sky-500/10">
+                            <i data-lucide="graduation-cap" class="w-24 h-24"></i>
+                        </div>
+                        <h5 class="text-lg font-bold text-sky-400 mb-4 flex items-center gap-2">
+                            <i data-lucide="graduation-cap" class="w-5 h-5"></i> Riwayat Pendidikan
+                        </h5>
+                        <div class="border-l-2 border-sky-500 pl-4 space-y-2">
+                            <div class="text-xs font-bold text-sky-400 bg-sky-500/10 px-2.5 py-1 rounded-md inline-block">2023 – 2026</div>
+                            <h6 class="text-base font-bold text-slate-200">SMK Negeri 2 Purwokerto</h6>
+                            <p class="text-sm text-slate-400">Jurusan Teknik Elektronika Audio Video</p>
+                            <p class="text-xs text-sky-300 font-semibold">Nilai Rata-Rata Rapor: 86,60</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Section: Pengalaman PKL -->
+    <section id="pengalaman" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-xs font-bold tracking-widest text-sky-400 uppercase mb-2">PENGALAMAN NYATA</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold">Praktik Kerja Lapangan (PKL)</h3>
+                <div class="w-12 h-1 bg-sky-500 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="max-w-4xl mx-auto reveal">
+                <!-- Kontainer Timeline -->
+                <div class="relative pl-8 sm:pl-32 space-y-12 before:absolute before:top-0 before:left-4 sm:before:left-24 before:w-0.5 before:h-full before:bg-slate-800">
+                    
+                    <!-- Item Pengalaman -->
+                    <div class="relative group">
+                        <!-- Tanggal untuk Layar Besar -->
+                        <div class="absolute -left-32 top-1.5 hidden sm:block text-right w-24">
+                            <span class="text-sm font-bold text-sky-400">Jan - Apr 2026</span>
+                            <span class="block text-xs text-slate-500">4 Bulan</span>
+                        </div>
+                        
+                        <!-- Penanda Bulat Timeline -->
+                        <div class="absolute -left-8 sm:-left-[35px] top-1.5 w-6 h-6 rounded-full bg-slate-950 border-4 border-sky-500 group-hover:bg-sky-400 transition-colors z-10 flex items-center justify-center">
+                            <div class="w-1.5 h-1.5 bg-slate-950 rounded-full"></div>
+                        </div>
+
+                        <!-- Kartu Konten -->
+                        <div class="glass p-8 rounded-3xl border border-slate-800 group-hover:border-sky-500/30 transition-all duration-300">
+                            <!-- Tanggal untuk Layar Mobile -->
+                            <span class="inline-block sm:hidden text-xs font-bold text-sky-400 bg-sky-500/10 px-2.5 py-1 rounded-md mb-3">Jan - Apr 2026</span>
+                            
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                                <div>
+                                    <h4 class="text-xl font-bold text-slate-100 group-hover:text-sky-400 transition-colors">Master Cool Perawatan & Servis AC</h4>
+                                    <p class="text-sm text-sky-400/80 font-semibold flex items-center gap-1.5">
+                                        <i data-lucide="user-check" class="w-4 h-4"></i> Teknisi Magang
+                                    </p>
+                                </div>
+                                <span class="text-xs bg-slate-900 text-slate-400 border border-slate-800 px-3 py-1.5 rounded-full self-start sm:self-center">Purwokerto</span>
+                            </div>
+
+                            <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                                Terjun langsung sebagai asisten teknisi untuk membantu pelanggan perumahan maupun instansi dalam menjaga performa kelistrikan dan peralatan rumah tangga mereka.
+                            </p>
+
+                            <!-- Tanggung Jawab Utama -->
+                            <div class="space-y-3">
+                                <h5 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Tanggung Jawab & Kegiatan Utama:</h5>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                    <div class="flex items-center space-x-3 text-sm text-slate-400">
+                                        <div class="w-5 h-5 bg-sky-500/10 text-sky-400 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <i data-lucide="check" class="w-3 h-3"></i>
+                                        </div>
+                                        <span>Perawatan rutin / Cuci AC berkala</span>
+                                    </div>
+                                    <div class="flex items-center space-x-3 text-sm text-slate-400">
+                                        <div class="w-5 h-5 bg-sky-500/10 text-sky-400 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <i data-lucide="check" class="w-3 h-3"></i>
+                                        </div>
+                                        <span>Instalasi & perbaikan kabel listrik</span>
+                                    </div>
+                                    <div class="flex items-center space-x-3 text-sm text-slate-400">
+                                        <div class="w-5 h-5 bg-sky-500/10 text-sky-400 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <i data-lucide="check" class="w-3 h-3"></i>
+                                        </div>
+                                        <span>Perbaikan kulkas / lemari es</span>
+                                    </div>
+                                    <div class="flex items-center space-x-3 text-sm text-slate-400">
+                                        <div class="w-5 h-5 bg-sky-500/10 text-sky-400 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <i data-lucide="check" class="w-3 h-3"></i>
+                                        </div>
+                                        <span>Perbaikan mesin cuci multi-merek</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Section: Keahlian -->
+    <section id="keahlian" class="py-24 relative bg-slate-900/30">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-xs font-bold tracking-widest text-sky-400 uppercase mb-2">KEAHLIAN & KEMAMPUAN</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold">Keahlian Teknis & Karakter</h3>
+                <div class="w-12 h-1 bg-sky-500 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 reveal">
+                <!-- Keahlian Teknis -->
+                <div class="space-y-6">
+                    <h4 class="text-xl font-bold flex items-center gap-2 text-slate-200">
+                        <i data-lucide="cpu" class="text-sky-400 w-6 h-6"></i> Keahlian Teknis
+                    </h4>
+                    
+                    <div class="glass p-8 rounded-3xl border border-slate-800 space-y-6">
+                        <!-- Item Keahlian 1 -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-sm">
+                                <span class="font-semibold text-slate-300">Servis AC, Kulkas & Mesin Cuci</span>
+                                <span class="text-sky-400 font-bold">95%</span>
+                            </div>
+                            <div class="h-2 bg-slate-950 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-sky-500 to-blue-600 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Item Keahlian 2 -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-sm">
+                                <span class="font-semibold text-slate-300">Perbaikan Alat Elektronika Audio Video</span>
+                                <span class="text-sky-400 font-bold">90%</span>
+                            </div>
+                            <div class="h-2 bg-slate-950 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-sky-500 to-blue-600 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Item Keahlian 3 -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-sm">
+                                <span class="font-semibold text-slate-300">Microsoft Excel & Aplikasi Perkantoran</span>
+                                <span class="text-sky-400 font-bold">85%</span>
+                            </div>
+                            <div class="h-2 bg-slate-950 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-sky-500 to-blue-600 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Item Keahlian 4 -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-sm">
+                                <span class="font-semibold text-slate-300">Pembuatan Website (HTML/CSS/JS)</span>
+                                <span class="text-sky-400 font-bold">80%</span>
+                            </div>
+                            <div class="h-2 bg-slate-950 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-sky-500 to-blue-600 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Keahlian Personal -->
+                <div class="space-y-6">
+                    <h4 class="text-xl font-bold flex items-center gap-2 text-slate-200">
+                        <i data-lucide="user" class="text-sky-400 w-6 h-6"></i> Karakter & Kemampuan Personal
+                    </h4>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Kartu Personal 1 -->
+                        <div class="glass p-6 rounded-2xl border border-slate-800 hover:border-sky-500/30 transition-all group">
+                            <div class="w-10 h-10 bg-sky-500/10 text-sky-400 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                <i data-lucide="message-square" class="w-5 h-5"></i>
+                            </div>
+                            <h5 class="text-base font-bold text-slate-100 mb-1">Komunikasi Efektif</h5>
+                            <p class="text-xs text-slate-400 leading-relaxed">Mampu menjelaskan masalah teknis secara ramah dan transparan kepada pelanggan.</p>
+                        </div>
+
+                        <!-- Kartu Personal 2 -->
+                        <div class="glass p-6 rounded-2xl border border-slate-800 hover:border-sky-500/30 transition-all group">
+                            <div class="w-10 h-10 bg-sky-500/10 text-sky-400 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                <i data-lucide="zap" class="w-5 h-5"></i>
+                            </div>
+                            <h5 class="text-base font-bold text-slate-100 mb-1">Cepat Belajar</h5>
+                            <p class="text-xs text-slate-400 leading-relaxed">Adaptif terhadap teknologi elektro baru dan instrumen digital terbaru.</p>
+                        </div>
+
+                        <!-- Kartu Personal 3 -->
+                        <div class="glass p-6 rounded-2xl border border-slate-800 hover:border-sky-500/30 transition-all group">
+                            <div class="w-10 h-10 bg-sky-500/10 text-sky-400 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                <i data-lucide="users" class="w-5 h-5"></i>
+                            </div>
+                            <h5 class="text-base font-bold text-slate-100 mb-1">Kerja Tim & Mandiri</h5>
+                            <p class="text-xs text-slate-400 leading-relaxed">Dapat diandalkan saat bekerja sendiri maupun berkolaborasi dalam proyek kelompok.</p>
+                        </div>
+
+                        <!-- Kartu Personal 4 -->
+                        <div class="glass p-6 rounded-2xl border border-slate-800 hover:border-sky-500/30 transition-all group">
+                            <div class="w-10 h-10 bg-sky-500/10 text-sky-400 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                <i data-lucide="shield-check" class="w-5 h-5"></i>
+                            </div>
+                            <h5 class="text-base font-bold text-slate-100 mb-1">Sikap Bertanggung Jawab</h5>
+                            <p class="text-xs text-slate-400 leading-relaxed">Menjunjung tinggi kejujuran dan hasil kerja yang rapi demi kepuasan pelanggan.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Section: Sertifikat -->
+    <section id="sertifikat" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-xs font-bold tracking-widest text-sky-400 uppercase mb-2">PENGAKUAN RESMI</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold">Sertifikasi & Penghargaan</h3>
+                <div class="w-12 h-1 bg-sky-500 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 reveal">
+                <!-- Sertifikat 1 -->
+                <div class="glass rounded-3xl overflow-hidden border border-slate-800 hover:-translate-y-2 transition-transform duration-300 flex flex-col h-full">
+                    <div class="p-6 bg-gradient-to-tr from-sky-500/10 to-indigo-500/10 border-b border-slate-800 h-40 flex items-center justify-center relative">
+                        <i data-lucide="award" class="w-16 h-16 text-sky-400 animate-pulse-slow"></i>
+                    </div>
+                    <div class="p-6 flex flex-col justify-between flex-grow">
+                        <div>
+                            <span class="text-xs font-bold text-sky-400 tracking-wider block mb-1">Sertifikasi Praktik</span>
+                            <h4 class="text-lg font-bold text-slate-100 mb-2">Sertifikat PKL (Teknisi AC)</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed">Diterbitkan oleh Master Cool sebagai pembuktian kelayakan keahlian servis pendingin udara profesional.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sertifikat 2 -->
+                <div class="glass rounded-3xl overflow-hidden border border-slate-800 hover:-translate-y-2 transition-transform duration-300 flex flex-col h-full">
+                    <div class="p-6 bg-gradient-to-tr from-sky-500/10 to-indigo-500/10 border-b border-slate-800 h-40 flex items-center justify-center relative">
+                        <i data-lucide="file-badge" class="w-16 h-16 text-sky-400 animate-pulse-slow"></i>
+                    </div>
+                    <div class="p-6 flex flex-col justify-between flex-grow">
+                        <div>
+                            <span class="text-xs font-bold text-sky-400 tracking-wider block mb-1">Kompetensi Jurusan</span>
+                            <h4 class="text-lg font-bold text-slate-100 mb-2">Sertifikat Kompetensi Elektronika</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed">Sertifikat pengakuan kompetensi resmi dasar bidang teknik audio video dari SMK Negeri 2 Purwokerto.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sertifikat 3 -->
+                <div class="glass rounded-3xl overflow-hidden border border-slate-800 hover:-translate-y-2 transition-transform duration-300 flex flex-col h-full">
+                    <div class="p-6 bg-gradient-to-tr from-sky-500/10 to-indigo-500/10 border-b border-slate-800 h-40 flex items-center justify-center relative">
+                        <i data-lucide="trophy" class="w-16 h-16 text-sky-400 animate-pulse-slow"></i>
+                    </div>
+                    <div class="p-6 flex flex-col justify-between flex-grow">
+                        <div>
+                            <span class="text-xs font-bold text-sky-400 tracking-wider block mb-1">Pemerintah DKI Jakarta</span>
+                            <h4 class="text-lg font-bold text-slate-100 mb-2">Sertifikat Apresiasi Diskominfotik</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed">Sertifikat & Apresiasi bergengsi langsung dari Dinas Komunikasi, Informatika, dan Statistik DKI Jakarta.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Section: Kontak -->
+    <section id="kontak" class="py-24 relative bg-slate-900/30">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-xs font-bold tracking-widest text-sky-400 uppercase mb-2">KONEKSI & KERJASAMA</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold">Hubungi Saya Kapan Saja</h3>
+                <div class="w-12 h-1 bg-sky-500 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 reveal">
+                <!-- Info Kontak Kiri -->
+                <div class="lg:col-span-5 space-y-6">
+                    <h4 class="text-2xl font-bold">Mari Berdiskusi!</h4>
+                    <p class="text-slate-400 leading-relaxed text-sm">
+                        Apakah Anda membutuhkan jasa teknisi AC handal, perbaikan instalasi listrik, perbaikan peralatan rumah tangga, atau ingin berdiskusi seputar peluang kerja sama? Saya sangat terbuka untuk dihubungi.
+                    </p>
+
+                    <div class="glass p-6 rounded-2xl border border-slate-800 space-y-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-11 h-11 bg-green-500/10 text-green-400 rounded-xl flex items-center justify-center">
+                                <i data-lucide="phone-call" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400">WhatsApp Fast Response</div>
+                                <a href="https://wa.me/6287828174736" target="_blank" class="text-sm font-bold text-slate-100 hover:text-green-400 transition-colors">0878-2817-4736</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-4">
+                            <div class="w-11 h-11 bg-rose-500/10 text-rose-400 rounded-xl flex items-center justify-center">
+                                <i data-lucide="instagram" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400">Instagram DM</div>
+                                <a href="https://instagram.com/rdhanisp" target="_blank" class="text-sm font-bold text-slate-100 hover:text-rose-400 transition-colors">@rdhanisp</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-4">
+                            <div class="w-11 h-11 bg-sky-500/10 text-sky-400 rounded-xl flex items-center justify-center">
+                                <i data-lucide="mail-check" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400">Email Kerja</div>
+                                <a href="mailto:ramadhani25489@gmail.com" class="text-sm font-bold text-slate-100 hover:text-sky-400 transition-colors">ramadhani25489@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulir Pesan -->
+                <div class="lg:col-span-7">
+                    <div class="glass p-8 rounded-3xl border border-slate-800">
+                        <form id="contact-form" class="space-y-6" onsubmit="sendToWhatsapp(event)">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label class="text-xs font-bold text-slate-300 uppercase">Nama Anda</label>
+                                    <input type="text" id="form-name" required placeholder="Contoh: Budi Santoso" class="w-full bg-slate-950/60 border border-slate-800 focus:border-sky-500 rounded-xl px-4 py-3.5 text-sm text-slate-100 placeholder-slate-650 outline-none transition-all">
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-xs font-bold text-slate-300 uppercase">No. WhatsApp / Email</label>
+                                    <input type="text" id="form-contact" required placeholder="Contoh: 0812xxxxx atau email" class="w-full bg-slate-950/60 border border-slate-800 focus:border-sky-500 rounded-xl px-4 py-3.5 text-sm text-slate-100 placeholder-slate-650 outline-none transition-all">
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="text-xs font-bold text-slate-300 uppercase">Subjek / Keperluan</label>
+                                <input type="text" id="form-subject" required placeholder="Contoh: Perbaikan AC / Penawaran Kerja" class="w-full bg-slate-950/60 border border-slate-800 focus:border-sky-500 rounded-xl px-4 py-3.5 text-sm text-slate-100 placeholder-slate-650 outline-none transition-all">
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="text-xs font-bold text-slate-300 uppercase">Isi Pesan Lengkap</label>
+                                <textarea id="form-message" rows="4" required placeholder="Ketikkan detail keinginan Anda di sini secara jelas..." class="w-full bg-slate-950/60 border border-slate-800 focus:border-sky-500 rounded-xl px-4 py-3.5 text-sm text-slate-100 placeholder-slate-650 outline-none transition-all resize-none"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-4 bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-bold rounded-2xl shadow-lg shadow-sky-500/10 hover:shadow-sky-500/20 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2">
+                                <i data-lucide="send" class="w-5 h-5"></i>
+                                Kirim Pesan ke WhatsApp
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-slate-900 bg-slate-950 text-slate-500 text-sm">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div>
+                <span class="text-lg font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-500">
+                    RAMADHANI.SP
+                </span>
+                <p class="text-xs mt-1 text-slate-600">&copy; 2026 Ramadhani Septo Pamungkas. Hak Cipta Dilindungi.</p>
+            </div>
+            
+            <div class="flex items-center space-x-6 text-slate-400">
+                <a href="https://instagram.com/rdhanisp" target="_blank" class="hover:text-sky-400 transition-colors">
+                    <i data-lucide="instagram" class="w-5 h-5"></i>
+                </a>
+                <a href="mailto:ramadhani25489@gmail.com" class="hover:text-sky-400 transition-colors">
+                    <i data-lucide="mail" class="w-5 h-5"></i>
+                </a>
+                <a href="https://wa.me/6287828174736" target="_blank" class="hover:text-sky-400 transition-colors">
+                    <i data-lucide="phone" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Interaktif -->
+    <script>
+        // Inisialisasi Lucide Icons
+        lucide.createIcons();
+
+        // 1. Toggle Mode Gelap / Terang (Dark / Light Mode)
+        function toggleTheme() {
+            const body = document.getElementById('body');
+            const themeIcon = document.getElementById('theme-icon');
+            const themeIconMobile = document.getElementById('theme-icon-mobile');
+            
+            body.classList.toggle('light');
+            
+            const isLight = body.classList.contains('light');
+            if (isLight) {
+                body.classList.remove('bg-slate-950', 'text-slate-100');
+                body.classList.add('bg-slate-50', 'text-slate-900');
+                themeIcon.setAttribute('data-lucide', 'moon');
+                themeIconMobile.setAttribute('data-lucide', 'moon');
+            } else {
+                body.classList.remove('bg-slate-50', 'text-slate-900');
+                body.classList.add('bg-slate-950', 'text-slate-100');
+                themeIcon.setAttribute('data-lucide', 'sun');
+                themeIconMobile.setAttribute('data-lucide', 'sun');
+            }
+            lucide.createIcons();
+        }
+
+        // 2. Menu Navigasi Mobile
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            
+            menu.classList.toggle('hidden');
+            
+            const isHidden = menu.classList.contains('hidden');
+            if (isHidden) {
+                menuIcon.setAttribute('data-lucide', 'menu');
+            } else {
+                menuIcon.setAttribute('data-lucide', 'x');
+            }
+            lucide.createIcons();
+        }
+
+        // 3. Efek Sticky Navbar saat di-scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2', 'shadow-xl', 'bg-slate-950/90', 'backdrop-blur-md');
+                navbar.classList.remove('py-4');
+            } else {
+                navbar.classList.add('py-4');
+                navbar.classList.remove('py-2', 'shadow-xl', 'bg-slate-950/90', 'backdrop-blur-md');
+            }
+        });
+
+        // 4. Animasi Reveal on Scroll menggunakan Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.1 // Elemen akan terpicu jika minimal 10% terlihat di layar
+        });
+
+        document.querySelectorAll('.reveal').forEach((el) => {
+            observer.observe(el);
+        });
+
+        // 5. Integrasi Formulir Kontak ke WhatsApp API
+        function sendToWhatsapp(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('form-name').value;
+            const contact = document.getElementById('form-contact').value;
+            const subject = document.getElementById('form-subject').value;
+            const message = document.getElementById('form-message').value;
+
+            // Merangkai teks pesan agar rapi
+            const textMessage = `Halo Ramadhani Septo,%0A%0ASaya ingin berdiskusi terkait:%0A*Nama:* ${name}%0A*Kontak:* ${contact}%0A*Perihal:* ${subject}%0A%0A*Isi Pesan:*%0A${message}`;
+            
+            // Nomor WhatsApp diperbarui
+            const waNumber = '6287828174736';
+            
+            // Redirect ke tautan WhatsApp API
+            const waUrl = `https://api.whatsapp.com/send?phone=${waNumber}&text=${textMessage}`;
+            window.open(waUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
